@@ -50,8 +50,6 @@ def main(batch_size,d_lr,g_lr, steps_per_eval, latent_size,max_steps):
     t_ds = db.get_dataset('training_set')
     v_ds = db.get_dataset('validation_set')
     steps = 0
-    flag = 'D'
-    counter = 0
     gen = Generator(latent_size=latent_size).to(device)
     disc = Discriminator().to(device)
     gen.train()
@@ -64,7 +62,7 @@ def main(batch_size,d_lr,g_lr, steps_per_eval, latent_size,max_steps):
         epoch_d_loss = 0
         train_ds = prepare_dataset(t_ds, batch_size=batch_size)
         valid_ds = prepare_dataset(v_ds, batch_size=1)
-        for index,batch in enumerate(tqdm(train_ds)):
+        for _,batch in enumerate(tqdm(train_ds)):
             g_optim.zero_grad()
             d_optim.zero_grad()
             images = batch['image']
