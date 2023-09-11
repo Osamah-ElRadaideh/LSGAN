@@ -104,9 +104,13 @@ class Discriminator(nn.Module):
     def forward(self, x):
         features = []
         x = self.conv1(x)
+        features.append(x)
         x = self.conv2(x)
+        features.append(x)
         x = self.conv3(x)
+        features.append(x)
         x = self.conv4(x)
+        features.append(x)
         x = self.flatten(x)
         return self.fc(x), features
 
